@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />                           
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <property name="location" value="./spring/adresses.properties"/>
+</bean>
+<bean id="adresse" class="com.exo.Adresse">
+	<property name="codePostal" value="59000"/>
+	<property name="rue" value="rue royal"/>
+	<property name="ville" value="Lille"/>
+	<property name="pays" value="France"/>
+</bean>
+<bean id="adresseA" class="com.exo.Adresse">
+	<property name="codePostal" value="59000"/>
+	<property name="rue" value="rue joyeuse"/>
+	<property name="ville" value="Lille"/>
+	<property name="pays" value="France"/>
+</bean>
+<bean id="adresseB" class="com.exo.Adresse">
+	<property name="codePostal" value="59000"/>
+	<property name="rue" value="rue liberté"/>
+	<property name="ville" value="Lille"/>
+	<property name="pays" value="France"/>
+</bean>
+<bean id="adresseC" class="com.exo.Adresse">
+	<property name="codePostal" value="${addr1.codePostal}"/>
+	<property name="rue" value="${addr1.rue}"/>
+	<property name="ville" value="${addr1.ville}"/>
+	<property name="pays" value="${addr1.pays}"/>
+</bean>
+<bean id="adresseD" class="com.exo.Adresse">
+	<property name="codePostal" value="${addr2.codePostal}"/>
+	<property name="rue" value="${addr2.rue}"/>
+	<property name="ville" value="${addr2.ville}"/>
+	<property name="pays" value="${addr2.pays}"/>
+</bean>
+<bean id="client" class="com.exo.Client">
+	<property name="nom" value="toto"/>
+	<property name="prenom" value="titi"/>
+	<property name="age" value="15"/>
+	<property name="adresses">
+	<list>
+		<ref bean="adresse"/>
+		<ref bean="adresseA"/>
+		<ref bean="adresseB"/>
+	</list>
+	</property>
+</bean>
+<bean id="client2" class="com.exo.Client">
+	<property name="nom" value="tutu"/>
+	<property name="prenom" value="titi"/>
+	<property name="age" value="15"/>
+	<property name="adresses">
+	<list>
+		<ref bean="adresseC"/>
+		<ref bean="adresseD"/>
+	</list>
+	</property>
+</bean>
+<bean id="client3" class="com.exo.Client" init-method="initialiser" destroy-method="detruire">
+	<property name="nom" value="tata"/>
+	<property name="prenom" value="titi"/>
+	<property name="age" value="15"/>
+</bean>
+
+
+</beans>
